@@ -1,0 +1,25 @@
+# The name used for this language pack repository
+name: examples
+
+# Optional. Health endpoints for deployed functions in all runtimes.
+# May be overridden by manifest.yaml settings at the language level.
+healthEndpoints:
+  liveness: /health/liveness
+  readiness: /health/readiness
+
+builderImages: 
+  pack: gcr.io/paketo-buildpacks/builder:base
+
+buildpacks:
+  - paketo-buildpacks/dotnet-core
+  - gcr.io/paketo-buildpacks/dotnet-core
+
+# Runtimes is a list of language packs supported by this repository
+runtimes:
+  - path: csharp       # Required. The path of the runtime directory from the repository root
+    name: csharp       # Optional. Name of the runtime; if not provided, path will be used
+
+    # A list of templates supplied by this language pack
+    templates:     # Required. One or more templates that correspond to directories within this language pack
+    - path: http # Required. The path to the template directory from the language pack root
+      name: http # Optional. The name of the template; if not provided path will be used
